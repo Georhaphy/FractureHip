@@ -1,3 +1,4 @@
 opencv-python-headless
 streamlit
 PyYAML
+numpy == 1.26.4
