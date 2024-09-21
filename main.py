@@ -14,6 +14,10 @@ background_image = """
 }
 </style>
 """
+
+st.markdown(background_image, unsafe_allow_html=True)
+
+
 yolo = YOLO_Pred('best.onnx','fracture.yaml') 
 
 st.title("Sakhon Frax")
