@@ -3,9 +3,24 @@ import cv2
 import numpy as np
 from yolo_predictions import YOLO_Pred
 
+
+background_image = """
+<style>
+[data-testid="stAppViewContainer"] > .main {
+    background-image: url("https://img5.pic.in.th/file/secure-sv1/smsk-1e26f337bb6ec6813.jpg");
+    background-size: 100vw 100vh;  # This sets the size to cover 100% of the viewport width and height
+    background-position: center;
+    background-repeat: no-repeat;
+}
+</style>
+"""
+
+st.markdown(background_image, unsafe_allow_html=True)
+
+
 yolo = YOLO_Pred('best.onnx','fracture.yaml') 
 
-st.title("ตรวจจับวัตถุ : ภาพนิ่ง")
+st.title("Sakhon Frax")
 img_file = st.file_uploader("เปิดไฟล์ภาพ")
 
 if img_file is not None:    
