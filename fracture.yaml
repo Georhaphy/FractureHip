@@ -1,7 +1,0 @@
-
-train: /content/drive/MyDrive/train/images
-val: /content/drive/MyDrive/valid/images
-test: /content/drive/MyDrive/test/images
-
-nc: 2
-names: ['Fracture', 'Normal']

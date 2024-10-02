@@ -1,8 +1,7 @@
 import streamlit as st
 import cv2
 import numpy as np
-from yolo_predictions import YOLO_Pred
-
+from ultralytics import YOLO
 
 background_image = """
 <style>
@@ -18,7 +17,8 @@ background_image = """
 st.markdown(background_image, unsafe_allow_html=True)
 
 
-yolo = YOLO_Pred('best.onnx','fracture.yaml') 
+model = YOLO('bestv8.pt')
+object_names = list(model.names.values())
 
 st.title("Sakhon Frax")
 img_file = st.file_uploader("เปิดไฟล์ภาพ")
@@ -26,17 +26,26 @@ img_file = st.file_uploader("เปิดไฟล์ภาพ")
 if img_file is not None:    
     file_bytes = np.asarray(bytearray(img_file.read()), dtype=np.uint8)
     img = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
-    #----------------------------------------------
-    pred_image, obj_box = yolo.predictions(img)
+   
     
-    if len(obj_box) > 0:
-        obj_names = ''
-        for obj in obj_box:
-            obj_names = obj_names + obj[4] + ' '
-        text_obj = 'ตรวจพบ ' + obj_names
-    else:
-        text_obj = 'ไม่พบวัตถุ'
-    #----------------------------------------------
-    st.header(text_obj)
-    st.image(pred_image, caption='ภาพ Output',channels="BGR")
+   
+result = model(img)
+
+
+for detection in result[0].boxes.data:
+   x0, y0 = (int(detection[0]), int(detection[1]))
+   x1, y1 = (int(detection[2]), int(detection[3]))
+   score = round(float(detection[4]), 2)
+   cls = int(detection[5])
+   object_name =  model.names[cls]
+   label = f'{object_name} {score}'  
+   
+   if  model.names[cls] == 'Fracture' :
+       cv2.rectangle(img, (x0, y0), (x1, y1), (255, 0, 0), 2)
+       cv2.putText(img, label, (x0, y0 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 0), 2)
+   else :
+       cv2.rectangle(img (x0, y0), (x1, y1), (0, 255, 0), 2)
+       cv2.putText(img, label, (x0, y0 - 10),  cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+                    
+    
     
