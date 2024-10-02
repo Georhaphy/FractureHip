@@ -29,7 +29,7 @@ if img_file is not None:
    
     
    
-result = model(img)
+result = model.predict(img)
 
 
 for detection in result[0].boxes.data:
