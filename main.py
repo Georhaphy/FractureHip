@@ -33,7 +33,7 @@ if img_file is not None:
 
 
 
-for detection in result.boxes.data:
+for detection in result[0].boxes.data:
    x0, y0 = (int(detection[0]), int(detection[1]))
    x1, y1 = (int(detection[2]), int(detection[3]))
    score = round(float(detection[4]), 2)
