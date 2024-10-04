@@ -19,7 +19,7 @@ st.markdown(background_image, unsafe_allow_html=True)
 
 model = YOLO('bestv8.pt')
 object_names = list(model.names.values())
-result = []
+#result = []
 
 st.title("Sakhon Frax")
 img_file = st.file_uploader("เปิดไฟล์ภาพ")
