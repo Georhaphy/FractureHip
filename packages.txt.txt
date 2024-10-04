@@ -2,3 +2,4 @@ freeglut3-dev
 libgtk2.0-dev
 libgl1
 libgl1-mesa-dev
+ln -s /usr/lib/x86_64-linux-gnu/mesa/libGL.so.1 /usr/lib/libGL.so.1
