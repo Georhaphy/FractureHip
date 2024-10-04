@@ -19,7 +19,7 @@ st.markdown(background_image, unsafe_allow_html=True)
 
 model = YOLO('bestv8.pt')
 object_names = list(model.names.values())
-result = []
+
 
 st.title("Sakhon Frax")
 img_file = st.file_uploader("เปิดไฟล์ภาพ")
@@ -28,25 +28,26 @@ if img_file is not None:
     file_bytes = np.asarray(bytearray(img_file.read()), dtype=np.uint8)
     img = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
     result = model.predict(img)
-    
+    print(result[0].boxes.data)
    
 
+        
 
-
-for detection in result[0].boxes.data:
-   x0, y0 = (int(detection[0]), int(detection[1]))
-   x1, y1 = (int(detection[2]), int(detection[3]))
-   score = round(float(detection[4]), 2)
-   cls = int(detection[5])
-   object_name =  model.names[cls]
-   label = f'{object_name} {score}'  
+    for detection in result[0].boxes.data:
+       x0, y0 = (int(detection[0]), int(detection[1]))
+       x1, y1 = (int(detection[2]), int(detection[3]))
+       score = round(float(detection[4]), 2)
+       cls = int(detection[5])
+       object_name =  model.names[cls]
+       label = f'{object_name} {score}'  
+       print(label)
    
-   if  model.names[cls] == 'Fracture' :
-       cv2.rectangle(img, (x0, y0), (x1, y1), (255, 0, 0), 2)
-       cv2.putText(img, label, (x0, y0 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 0), 2)
-   else :
-       cv2.rectangle(img (x0, y0), (x1, y1), (0, 255, 0), 2)
-       cv2.putText(img, label, (x0, y0 - 10),  cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+       if  object_name == 'Fracture' :
+           cv2.rectangle(img, (x0, y0), (x1, y1), (255, 0, 0), 2)
+           cv2.putText(img, label, (x0, y0 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 0), 2)
+       else :
+           cv2.rectangle(img (x0, y0), (x1, y1), (0, 255, 0), 2)
+           cv2.putText(img, label, (x0, y0 - 10),  cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
                     
     
     
