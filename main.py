@@ -48,11 +48,13 @@ if img_file is not None:
            cv2.rectangle(img, (x0, y0), (x1, y1), (255, 0, 0), 2)
            cv2.putText(img, label, (x0, y0 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 0), 2)
        else :
-           cv2.rectangle(img (x0, y0), (x1, y1), (0, 255, 0), 2)
+           cv2.rectangle(img, (x0, y0), (x1, y1), (0, 255, 0), 2)
            cv2.putText(img, label, (x0, y0 - 10),  cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
                     
     #detections = result[0].verbose()
     #st.image(cv2.putText(img, detections, (10, 10),cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2))
-    resized_image = cv2.resize(img, (1024, 768))
-    st.image(resized_image, channels="RGB", use_column_width= "auto")
+    #resized_image = cv2.resize(img, (1024, 768))
+    #st.image(resized_image, channels="RGB", use_column_width= "auto")
+    st.image(img, channels="RGB", use_column_width= "auto")
+    
     
