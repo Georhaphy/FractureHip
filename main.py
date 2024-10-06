@@ -46,10 +46,10 @@ if img_file is not None:
       
        if  object_name == 'Fracture' :
            cv2.rectangle(img, (x0, y0), (x1, y1), (255, 0, 0), 2)
-           cv2.putText(img, label, (x0, y0 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 0), 2)
+           cv2.putText(img, label, (x0, y0 + 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 0), 2)
        else :
            cv2.rectangle(img, (x0, y0), (x1, y1), (0, 255, 0), 2)
-           cv2.putText(img, label, (x0, y0 - 10),  cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+           cv2.putText(img, label, (x0, y0 + 10),  cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
                     
     
     st.image(img, channels="RGB", use_column_width= "auto")
